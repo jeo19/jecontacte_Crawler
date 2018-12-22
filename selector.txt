@@ -1,31 +1,7 @@
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.category-products > ul > li > div.product-info > h2 > a
-https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/xinsulated-echogenic-30-7fa.jpg.pagespeed.ic.tdZJnIFfTb.webp
-https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/xinsulated-echogenic-30-7fa.jpg.pagespeed.ic.tdZJnIFfTb.webp
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div > div.page-title.category-title > p:nth-child(2)
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.page-title.category-title > p:nth-child(2)
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.page-title.category-title > p:nth-child(2)
-#product-collection-image-250463
-#product-collection-image-281274
-//*[@id="product-collection-image-250463"]
-
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.category-products > ul > li > a
-
-<img id="product-collection-image-250463" class="unveil" src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/64/9/monoject-enteral-syringe-with-tip-cap-sterile-3-ml-b9b.jpg" data-src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/64/9/monoject-enteral-syringe-with-tip-cap-sterile-3-ml-b9b.jpg" alt="Monoject Enteral Syringe with Tip Cap Sterile 3 ml">
-injection-syringe-20ml-luer-lock-100-bx-8-bx-cs-7fa.jpg
-omnican-100-syringe-1ml-insulin-30g-x-5-16-pn-10-pk-240-pk-cs-7fa.jpg
-syringe-with-needle-1ml-30g-x--7fa.jpg
-syringe-luer-lock-tip-with-wide-finger-flange-12ml--313.jpg
-injection-syringe-20ml-luer-lock-100-bx-8-bx-cs-7fa.jpg
-<img id="product-collection-image-255978" class="unveil" src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/injection-syringe-20ml-luer-lock-100-bx-8-bx-cs-7fa.jpg" data-src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/injection-syringe-20ml-luer-lock-100-bx-8-bx-cs-7fa.jpg" alt="Injection Syringe, 20mL, Luer Lock, 100/bx, 8 bx/cs">
-<img id="product-collection-image-255978" class="unveil" src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/xinjection-syringe-20ml-luer-lock-100-bx-8-bx-cs-7fa.jpg.pagespeed.ic.tdZJnIFfTb.webp" data-src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/xinjection-syringe-20ml-luer-lock-100-bx-8-bx-cs-7fa.jpg.pagespeed.ic.tdZJnIFfTb.webp" alt="Injection Syringe, 20mL, Luer Lock, 100/bx, 8 bx/cs" data-pagespeed-url-hash="263638253" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-<img id="product-collection-image-255986" class="unveil" src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/omnican-100-syringe-1ml-insulin-30g-x-5-16-pn-10-pk-240-pk-cs-7fa.jpg" data-src="https://smhttp-ssl-51929.nexcesscdn.net/media/extendware/ewimageopt/media/inline/a8/c/omnican-100-syringe-1ml-insulin-30g-x-5-16-pn-10-pk-240-pk-cs-7fa.jpg" alt="Omnican 100 Syringe, 1mL Insulin, 30G x 5/16&quot; PN, 10/pk, 240 pk/cs">
-tdZJnIFfTb.webp
-tdZJnIFfTb.webp
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div > div.category-products > ul > li:nth-child(1) > a
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div > div.category-products > ul > li:nth-child(1) > a
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.category-products > ul > li:nth-child(1) > a
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div > div.category-products > ul > li:nth-child(1) > a
-body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div > div.category-products > ul > li:nth-child(2) > a
-product title: body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.product-name.page-title > h1
-sku: #product_addtocart_form > div.product-main > div.product-info-bar > span.product-sku
-product descrition : body > div.zoomContainer > div.zoomWindowContainer > div
+###CSS selector
+    @---Search the items----@
+        gender = "#menulinks > form > select:nth-child(5) > option:nth-child(2)"
+        fromAge = "#menulinks > form > select:nth-child(8) > option:nth-child(1)"
+        toAge = "#menulinks > form > select:nth-child(9) > option:nth-child(7)"
+        country = "#menupaysdropdown > option:nth-child(2)"
+        region = "#menulinks > form > input[type='submit']:nth-child(18)"
