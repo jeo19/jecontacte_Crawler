@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: ISO-8859-1 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,19 +13,28 @@ import csv
 import re
 
 product_count = 0
+# options = webdriver.ChromeOptions()
+# options.add_argument("headless")
+# options.add_argument("window-size=1920x1080")
+# options.add_argument("--disable-gpu")
 path = "chromedriver"
 driver = webdriver.Chrome(path)
+all_userInfo = []
 
 
 def openSite(startUrl):
     try:
         driver.get(startUrl)
+        # driver.implicitly_wait(3)
         wait = WebDriverWait(driver, 10)
         wait.until(EC.element_to_be_clickable((By.ID, "standardblock")))
+        # driver.get_screenshot_as_file("jecontacte.png")
         # Wait untill ID "standardblock".
+        return driver
     except:
         driver.get(startUrl)
         wait = WebDriverWait(driver, 10)
+        # driver.implicitly_wait(3)
         return driver
 
 
@@ -47,105 +56,52 @@ def select_attr(gender, fromAge, toAge, country, region):
 
 def countPage():
     try:
-        count_select = driver.find_element_by_css_selector(
-            "body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.page-title.category-title > p:nth-child(2)"
-        )
-        total_count = count_select.text.split(" ")
-        totalPD = total_count[
-            -1
-        ]  # It will fetch the last item 298 of string "Your selection 1-24 items of 298"
-        print(totalPD)
-        totalPN = math.ceil(int(totalPD) / 24.0)  # 298 items divide 24 products
-        print("Success:< countPage > function did execute!.........")
-        return totalPN
-    except:
-        totalPD = total_count[
-            -2
-        ]  # It will fetch the last item 298 of string "Your selection 1-24 items of 298"
-        print(totalPD)
-        totalPN = math.ceil(int(totalPD) / 24.0)  # 298 items divide 24 products
-        print("Success:< countPage > function did execute!.........")
-        return totalPN
+        page = 1
+        currentUrl = driver.current_url
+        global all_userInfo
 
-
-def hasImg_products():
-    URL = driver.current_url
-    try:
-        response = requests.get(URL)
-        soup = BeautifulSoup(response.text, "html.parser")
-        products_tag = driver.find_elements_by_css_selector(
-            "body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.category-products > ul > li > div.product-info > h2 > a"
-        )  # fetching products
-        hasImg_tag = soup.select(
-            'img[id*="product-collection-image"]'
-        )  # fetching img tags
-        remove_tag = soup.select('img[data-src*="-51f.jpg"]')  # fetching non image tags
-        products_name = []
-        detail_url = []
-        for index in remove_tag:
-            hasImg_tag.remove(index)  # remove non img tags
-        for hasImg in hasImg_tag:
-            product = BeautifulSoup(str(hasImg), "html.parser")
-            products_name.append(
-                product.find("img")["alt"]
-            )  # fetching products name having img
-        for index in products_name:
-            detail_url.append(
-                soup.find("a", {"title": index})["href"]
-            )  # fetching the url list of products having img
-
-        print("Success:< hasImg_products > function was execute!.........")
-        return detail_url
-    except:
-        print("Error: < hasImg_products > function is crashed!.........")
-
-
-def get_Pinfo(URL_LIST):
-    print(requests.get(URL_LIST))
-
-    for product_url in URL_LIST:
-        try:
-            r = requests.get(product_url, timeout=27)
-            soup = BeautifulSoup(r.text, "html.parser")
-            product_name = soup.select(
-                "body > div.wrapper > div > div.main-container.col1-layout > div > div.col-main > div.product-name.page-title > h1"
+        while 1:
+            if page == 67:
+                break
+            driver.get(currentUrl + "&page=" + str(page))
+            response = requests.get(driver.current_url)
+            source = response.text
+            # print(source)
+            soup = BeautifulSoup(source, "html.parser")
+            profile = soup.select("#pagecontainer > div > center > div > div > span ")
+            summary = soup.select(
+                "#pagecontainer > div > center > div.vignette_infos > div.wideDiv"
             )
-            sku = soup.select(
-                "#product_addtocart_form > div.product-main > div.product-info-bar > span.product-sku"
-            )
-            product_description = soup.select(
-                "#product_addtocart_form > div.product-main > div.product-essential > div.product-tabs > div > div.tab-switcher.product-description > div"
-            )
-            if len(product_description) == 0:  # if product_description is none
-                continue
-            #     product_description=soup.select("#product_addtocart_form > div.product-main > div.product-essential > div.product-tabs > div > div.tab-switcher.product-description > div")
-            #     product_description=soup.select("#product_addtocart_form > div.product-main > div.product-essential > div.product-tabs > div > div.tab-switcher.product-description > div
-            product_img = soup.find("img", {"id": "image-main"})["href"]
-            # get info
-            product_name = product_name[0].text
-            sku = sku[0].text
-            product_description = product_description[0].text
-            # save info
-            saveResult(product_name, sku, product_description, product_img)
-        except Exception as e:
-            # # print(type(e))
-            # print(e.args)
-            print(e)
-            print("Error: < get_Pinfo > function is crashed!.........")
+            for profile_content, summary in zip(profile, summary):
+                userInfo = []
+                a, b = profile_content.text.split("\n")
+                a = a.split()
+                id = a[0].replace(",", "")
+                age = a[1]
+                c = re.findall("\d\sphotos", str(b))
+                c = "".join(map(str, c))
+                region = b.replace(c, "")
+                userInfo.append(id)
+                userInfo.append(age)
+                userInfo.append(region)
+                userInfo.append(summary.text)
+                all_userInfo.append(userInfo)
+            print("Total " + str(page) + "pages " + "was crawler!")
+            page = page + 1
+        return all_userInfo
+
+    except Exception as e:
+        print(e)
 
 
-def saveResult(product_name, sku, product_description, product_img):
+def saveResult(all_userInfo):
     global product_count
-    img_name = product_img.split("/")
-    product_count = product_count + 1
-    print(product_name)
-    print(str(product_count) + " products is crawled!")
-    sku = sku.replace("\n", "").replace("\r", "")
-    product_name = product_name.replace("\n", "").replace("\r", "")
-    product_description = product_description.replace("\n", "").replace("\r", "")
-    f = open("product_details.csv", "a", encoding="utf-8", newline="")
-    wr = csv.writer(f)
-    wr.writerow([sku, product_name, product_description, img_name[-1]])
+    f = open("male_young(18~24).csv", "a", encoding="ISO-8859-1", newline="")
+    for userInfo in all_userInfo:
+        id = userInfo[0]
+        age = userInfo[1]
+        region = userInfo[2].replace("\n", "").replace("\r", "")
+        description = userInfo[3].replace("\n", "").replace("\r", "")
+        wr = csv.writer(f)
+        wr.writerow([id, age, region, description])
     f.close()
-    urllib.request.urlretrieve(product_img, "./image/" + img_name[-1])
-

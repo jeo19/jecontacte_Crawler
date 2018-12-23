@@ -1,7 +1,11 @@
 ###CSS selector
-    @---Search the items----@
+    @---Search the items---@
         gender = "#menulinks > form > select:nth-child(5) > option:nth-child(2)"
         fromAge = "#menulinks > form > select:nth-child(8) > option:nth-child(1)"
         toAge = "#menulinks > form > select:nth-child(9) > option:nth-child(7)"
         country = "#menupaysdropdown > option:nth-child(2)"
         region = "#menulinks > form > input[type='submit']:nth-child(18)"
+    @--- Selector summary of profile---@
+        #pagecontainer > div:nth-child(7) > center > div.vignette_infos > div.wideDiv
+        #pagecontainer > div:nth-child(7) > center > div:nth-child(1) > div > span
+        #menulinks > form > select:nth-child(9) > option:nth-child(23)
